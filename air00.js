@@ -21,8 +21,8 @@ Afficher error et quitter le programme en cas de problèmes d’arguments.
 /********************
  *     Functions     *
  ********************/
-const split = (str, sep) => {
-  const newArray = str.split(sep);
+const split = (str, separator) => {
+  const newArray = str.split(new RegExp(separator.join("|")));
   return newArray;
 };
 
@@ -39,11 +39,12 @@ const error = () => {
  ********************/
 const parsing = () => {
   const str = process.argv;
+  const separator = [" ", "_", "\n"];
   str.splice(0, 2);
   if (str.length != 1 || !isNaN(str[0])) {
     return error();
   }
-  return split(str[0], " ");
+  return split(str[0], separator);
 };
 
 /****************
