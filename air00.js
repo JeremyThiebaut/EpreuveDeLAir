@@ -21,14 +21,16 @@ Afficher error et quitter le programme en cas de problèmes d’arguments.
 /********************
  *     Functions     *
  ********************/
+// get the string and format it with a set of separators
 const split = (str, separator) => {
-  const newArray = str.split(new RegExp(separator.join("|")));
+  const newArray = str.split(separator);
   return newArray;
 };
 
 /**********************
  *   Error management  *
  **********************/
+// return errors
 const error = () => {
   console.log("error");
   process.exit();
@@ -37,9 +39,10 @@ const error = () => {
 /********************
  *      Parsing      *
  ********************/
+// retrieves the good part of the string as well as the separators
 const parsing = () => {
   const str = process.argv;
-  const separator = [" ", "_", "\n"];
+  const separator = /(?:[,\s_]+)/;
   str.splice(0, 2);
   if (str.length != 1 || !isNaN(str[0])) {
     return error();
@@ -50,6 +53,7 @@ const parsing = () => {
 /****************
  *   Formatting  *
  ****************/
+// formats the result and displays it in console
 const displayArray = (result) => {
   let newString = "";
   for (let i = 0; i < result.length - 1; i++) {
@@ -62,9 +66,11 @@ const displayArray = (result) => {
 /********************
  *        Main       *
  ********************/
+// get the result
 const result = parsing();
 
 /********************
  *       Result      *
  ********************/
+// execute the function
 displayArray(result);
