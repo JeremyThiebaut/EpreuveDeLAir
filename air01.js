@@ -17,3 +17,58 @@ Crevette magique dans
 Afficher error et quitter le programme en cas de problèmes d’arguments.
  */
 
+/********************
+ *     Functions     *
+ ********************/
+// Uses the string and uses the separator get as argument and returns an array
+const splitArg = (string, spliter) => {
+  return string.split(spliter);
+};
+
+/********************
+ *      Parsing      *
+ ********************/
+// Retrieves the good part of the string as well as the separators
+const parsing = () => {
+  const arg = process.argv;
+  arg.splice(0, 2);
+  if (arg.length != 2) {
+    return error();
+  } else {
+    return splitArg(arg[0], arg[1]);
+  }
+};
+
+/**********************
+ *   Error management  *
+ **********************/
+// Return errors
+const error = () => {
+  console.log("error");
+  process.exit();
+};
+
+/****************
+ *   Formatting  *
+ ****************/
+// Formats the result and displays it in console
+const displayArray = (result) => {
+  let newString = "";
+  for (let i = 0; i < result.length - 1; i++) {
+    newString += `${result[i]}\n`;
+  }
+  newString += `${result[result.length - 1]}`;
+  console.log(newString);
+};
+
+/********************
+ *        Main       *
+ ********************/
+// Get the result
+const result = parsing();
+
+/********************
+ *       Result      *
+ ********************/
+// Execute the function
+displayArray(result);
