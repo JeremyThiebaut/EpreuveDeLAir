@@ -17,7 +17,12 @@ Afficher error et quitter le programme en cas de problèmes d’arguments ou de 
  ****************/
 // uses the "readFileSync" module which asks for the file to open as well as the URL Encode
 const oppenFile = (file, fs) => {
-  return fs.readFileSync(file, "utf8");
+  try {
+    return fs.readFileSync(file, "utf8");
+  } catch (error) {
+    console.log("Error:", error.stack);
+    process.exit();
+  }
 };
 
 /**********************
